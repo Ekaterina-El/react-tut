@@ -3,15 +3,14 @@ import MyPosts from "./MyPosts/MyPosts";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = ({ posts, newPostText, addPost, changeNewPostText }) => {
+const Profile = ({ posts, newPostText, dispatch }) => {
   return (
     <>
       <ProfileInfo />
       <MyPosts
         posts={posts}
         newPostText={newPostText}
-        addPost={addPost}
-        changeNewPostText={changeNewPostText}
+        dispatch={dispatch}
       />
     </>
   );

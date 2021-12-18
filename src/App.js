@@ -7,14 +7,14 @@ import Nav from "./components/NavBar/Nav";
 import Profile from "./components/Profile/Profile";
 import store from "./redux/state";
 
-function App({state, addPost, changeNewPostText}) {
+function App({state, dispatch}) {
 
   return (
     <div className="appWrapper">
       <Header />
       <Nav />
       <div className="content">
-          <Route path="/profile/" render={() => <Profile {...state.profile}  changeNewPostText={changeNewPostText} addPost={addPost} />} />
+          <Route path="/profile/" render={() => <Profile {...state.profile} dispatch={dispatch} />} />
           <Route path="/dialogs/" render={() => <Dialogs {...state.dialogs} />} />
       </div>
     </div>
