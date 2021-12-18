@@ -52,8 +52,10 @@ const initState = {
 const dialogReducer = (state = initState, action) => {
   switch (action.type) {
     case CHANGE_NEW_MESSAGE_TEXT: {
-      state.newMessageText = action.text;
-      return state;
+      return {
+        ...state,
+        newMessageText: action.text,
+      };
     }
 
     case ADD_MESSAGE: {
