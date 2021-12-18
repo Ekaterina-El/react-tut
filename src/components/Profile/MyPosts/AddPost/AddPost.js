@@ -1,23 +1,16 @@
 import React from "react";
-import { ADD_POST, CHANGE_NEW_POST_TEXT } from "../../../../redux/state";
+import { addPostAC, changeNewPostTextAC } from "../../../../redux/state";
 import s from "./AddPost.module.css";
 
 const AddPost = ({ newPostText, dispatch }) => {
   debugger;
 
   const handleChange = (e) => {
-    const action = {
-      type: CHANGE_NEW_POST_TEXT,
-      text: e.target.value,
-    };
-    dispatch(action);
+    dispatch(changeNewPostTextAC(e.target.value));
   };
 
   const handleAddPost = () => {
-    const action = {
-      type: ADD_POST,
-    };
-    dispatch(action);
+    dispatch(addPostAC());
   };
 
   return (

@@ -15,7 +15,7 @@ function App({state, dispatch}) {
       <Nav />
       <div className="content">
           <Route path="/profile/" render={() => <Profile {...state.profile} dispatch={dispatch} />} />
-          <Route path="/dialogs/" render={() => <Dialogs {...state.dialogs} />} />
+          <Route path="/dialogs/" render={() => <Dialogs {...state.dialogs} dispatch={dispatch} />} />
       </div>
     </div>
   );
