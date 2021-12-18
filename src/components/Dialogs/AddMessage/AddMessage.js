@@ -1,12 +1,11 @@
 import React from "react";
-import { addMessageAC, changeNewMessageTextAC } from "../../../redux/dialogReducer";
 
-const AddMessage = ({ newMessageText, dispatch }) => {
+const AddMessage = ({ newMessageText, changeMessageText, sendMessage }) => {
   const handleChangeMessageText = (e) => {
-    dispatch(changeNewMessageTextAC(e.target.value));
+    changeMessageText(e.target.value)
   };
 
-  const handleSendMessage = () => dispatch(addMessageAC());
+  const handleSendMessage = () => sendMessage();
 
   return (
     <div>

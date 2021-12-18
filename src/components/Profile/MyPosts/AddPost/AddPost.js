@@ -1,16 +1,15 @@
 import React from "react";
-import { addPostAC, changeNewPostTextAC } from "../../../../redux/profileReducer";
 import s from "./AddPost.module.css";
 
-const AddPost = ({ newPostText, dispatch }) => {
+const AddPost = ({ newPostText, addPost, changeNewPostText }) => {
   debugger;
 
   const handleChange = (e) => {
-    dispatch(changeNewPostTextAC(e.target.value));
+    changeNewPostText(e.target.value)
   };
 
   const handleAddPost = () => {
-    dispatch(addPostAC());
+    addPost();
   };
 
   return (

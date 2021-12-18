@@ -4,7 +4,7 @@ import profileReducer from "./profileReducer";
 
 const reducers = combineReducers({
     "profile": profileReducer,
-    "dialog": dialogReducer
+    "dialogs": dialogReducer
 })
 
 const store = createStore(reducers);

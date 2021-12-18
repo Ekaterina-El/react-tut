@@ -7,7 +7,7 @@ import Nav from "./components/NavBar/Nav";
 import Profile from "./components/Profile/Profile";
 
 function App({state, dispatch}) {
-
+  debugger
   return (
     <div className="appWrapper">
       <Header />

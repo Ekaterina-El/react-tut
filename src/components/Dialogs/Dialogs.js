@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import AddMessage from "./AddMessage/AddMessage";
+import AddMessageContainer from "./AddMessage/AddMessagContainer";
 import s from "./Dialogs.module.css";
 
 const DialogItem = ({ userId, userName }) => {
@@ -19,8 +19,8 @@ const MessageItem = ({ text }) => {
   return <div className={s.dialogItem}>{text}</div>;
 };
 
-
-const Dialogs = ({dialogs, messages, dispatch, newMessageText}) => {
+const Dialogs = ({ dialogs, messages, dispatch, newMessageText }) => {
+  debugger
   return (
     <div className={s.wrapper}>
       <div className={s.title}>Dialogs</div>
@@ -33,12 +33,13 @@ const Dialogs = ({dialogs, messages, dispatch, newMessageText}) => {
 
         <div className={s.dialog}>
           {messages.map((message) => {
-            return (
-              <MessageItem key={message.id}  {...message} />
-            );
+            return <MessageItem key={message.id} {...message} />;
           })}
 
-          <AddMessage  dispatch={dispatch} newMessageText={newMessageText}/>
+          <AddMessageContainer
+            dispatch={dispatch}
+            newMessageText={newMessageText}
+          />
         </div>
       </div>
     </div>
