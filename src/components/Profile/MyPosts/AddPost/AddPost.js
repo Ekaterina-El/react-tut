@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { addPost, changeNewPostText } from "../../../../redux/state";
+import React from "react";
 import s from "./AddPost.module.css";
 
-const AddPost = ({newPostText}) => {
-
+const AddPost = ({newPostText, addPost, changeNewPostText}) => {
+  debugger
   return (
     <div>
       <textarea value={newPostText} onChange={(e) => changeNewPostText(e.target.value)} />
