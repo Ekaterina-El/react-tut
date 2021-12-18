@@ -1,27 +1,45 @@
-import React from 'react'
-import s from './Dialogs.module.css'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import s from "./Dialogs.module.css";
 
-const Dialogs = () => {
-    return (
-        <div className={s.wrapper}>
-            <div className={s.title}>Dialogs</div>
-            <div className={s.content}>
-                <div className={s.usersList}>
-                    <div className={s.userItem}>Andraw</div>
-                    <div className={s.userItem}>Dmitry</div>
-                    <div className={s.userItem}>Sasha</div>
-                    <div className={s.userItem}>Sveta</div>
-                    <div className={s.userItem}>Valera</div>
-                    <div className={s.userItem}>Victor</div>
-                </div>
+const DialogItem = ({ userId, userName }) => {
+  return (
+    <NavLink
+      className={s.userItem}
+      activeClassName={s.active}
+      to={"/dialogs/" + userId}
+    >
+      {userName}
+    </NavLink>
+  );
+};
 
-                <div className={s.dialog}>
-                    <div className={s.dialogItem}>Hello</div>
-                    <div className={s.dialogItem}>yooo</div>
-                </div>
-            </div>
+const MessageItem = ({ text }) => {
+  return <div className={s.dialogItem}>{text}</div>;
+};
+
+
+const Dialogs = ({dialogs, messages}) => {
+  return (
+    <div className={s.wrapper}>
+      <div className={s.title}>Dialogs</div>
+      <div className={s.content}>
+        <div className={s.usersList}>
+          {dialogs.map((dialog) => {
+            return <DialogItem key={dialog.userId} {...dialog} />;
+          })}
         </div>
-    )
-}
 
-export default Dialogs
+        <div className={s.dialog}>
+          {messages.map((message) => {
+            return (
+              <MessageItem key={message.id}  {...message} />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dialogs;

@@ -6,14 +6,14 @@ import Header from "./components/Header/Header";
 import Nav from "./components/NavBar/Nav";
 import Profile from "./components/Profile/Profile";
 
-function App() {
+function App({state}) {
   return (
     <div className="appWrapper">
       <Header />
       <Nav />
       <div className="content">
-          <Route path="/profile/" render={() => <Profile />} />
-          <Route path="/dialogs/" render={() => <Dialogs />} />
+          <Route path="/profile/" render={() => <Profile {...state.profile} />} />
+          <Route path="/dialogs/" render={() => <Dialogs {...state.dialogs} />} />
       </div>
     </div>
   );
