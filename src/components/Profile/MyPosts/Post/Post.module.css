@@ -1,0 +1,15 @@
+.post_wrapper {
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+}
+
+.profile_photo {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post_text {
+}
