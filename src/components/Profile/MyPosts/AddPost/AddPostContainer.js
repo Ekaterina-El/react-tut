@@ -1,18 +1,29 @@
 import React from "react";
-import { addPostAC, changeNewPostTextAC } from "../../../../redux/profileReducer";
+import {
+  addPostAC,
+  changeNewPostTextAC,
+} from "../../../../redux/profileReducer";
+import StoreContext from "../../../../StoreContext";
 import AddPost from "./AddPost";
 
-const AddPostContainer = ({dispatch, ...props}) => {
+const AddPostContainer = () => {
+  return (
+    <StoreContext.Consumer>
+      {(store) => {
+        const handleChange = (text) => {
+          store.dispatch(changeNewPostTextAC(text));
+        };
+      
+        const handleAddPost = () => {
+          store.dispatch(addPostAC());
+        };
 
-  const handleChange = text => {
-    dispatch(changeNewPostTextAC(text));
-  };
-
-  const handleAddPost = () => {
-    dispatch(addPostAC());
-  };
-
-  return <AddPost addPost={handleAddPost} changeNewPostText={handleChange}  {...props} />
+        return (
+          <AddPost newPostText={store.getState().profile.newPostText} addPost={handleAddPost} changeNewPostText={handleChange} />
+        );
+      }}
+    </StoreContext.Consumer>
+  );
 };
 
 export default AddPostContainer;

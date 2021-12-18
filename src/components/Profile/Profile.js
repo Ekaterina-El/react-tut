@@ -1,17 +1,13 @@
 import React from "react";
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = ({ posts, newPostText, dispatch }) => {
+export const Profile = () => {
   return (
     <>
       <ProfileInfo />
-      <MyPosts
-        posts={posts}
-        newPostText={newPostText}
-        dispatch={dispatch}
-      />
+      <MyPostsContainer />
     </>
   );
 };

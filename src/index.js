@@ -7,18 +7,21 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import {Provider} from "./StoreContext";
 
-const rerenderEntireTree = (state) => {
+const rerenderEntireTree = () => {
   ReactDOM.render(
     <BrowserRouter>
-      <App state={state} dispatch={store.dispatch.bind(store)} />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>,
     document.getElementById("root")
   );
 };
 
 store.subscribe(() => {
-  rerenderEntireTree(store.getState())
+  rerenderEntireTree(store.getState());
 });
 rerenderEntireTree(store.getState());
 

@@ -19,8 +19,7 @@ const MessageItem = ({ text }) => {
   return <div className={s.dialogItem}>{text}</div>;
 };
 
-const Dialogs = ({ dialogs, messages, dispatch, newMessageText }) => {
-  debugger
+const Dialogs = ({ dialogs, messages }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.title}>Dialogs</div>
@@ -36,10 +35,7 @@ const Dialogs = ({ dialogs, messages, dispatch, newMessageText }) => {
             return <MessageItem key={message.id} {...message} />;
           })}
 
-          <AddMessageContainer
-            dispatch={dispatch}
-            newMessageText={newMessageText}
-          />
+          <AddMessageContainer />
         </div>
       </div>
     </div>
