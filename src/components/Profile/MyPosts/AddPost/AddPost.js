@@ -1,5 +1,5 @@
 import React from "react";
-import { addPostAC, changeNewPostTextAC } from "../../../../redux/state";
+import { addPostAC, changeNewPostTextAC } from "../../../../redux/profileReducer";
 import s from "./AddPost.module.css";
 
 const AddPost = ({ newPostText, dispatch }) => {

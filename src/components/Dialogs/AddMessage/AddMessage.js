@@ -1,5 +1,5 @@
 import React from "react";
-import { addMessageAC, changeNewMessageTextAC } from "../../../redux/state";
+import { addMessageAC, changeNewMessageTextAC } from "../../../redux/dialogReducer";
 
 const AddMessage = ({ newMessageText, dispatch }) => {
   const handleChangeMessageText = (e) => {
