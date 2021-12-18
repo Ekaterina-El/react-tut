@@ -4,13 +4,13 @@
     background-color: rgb(76, 223, 108);
 }
 
-.item a {
+.item {
     color: white;
     text-decoration: none;
 
-    color: white
+    display: block;
 }
 
-.active a {
+.active {
     color: rgb(0, 100, 25) !important;
 }

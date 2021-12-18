@@ -1,3 +1,5 @@
+import { withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
@@ -10,11 +12,11 @@ function App() {
       <Header />
       <Nav />
       <div className="content">
-        {/* <Profile /> */}
-        <Dialogs />
+          <Route path="/profile/" render={() => <Profile />} />
+          <Route path="/dialogs/" render={() => <Dialogs />} />
       </div>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
