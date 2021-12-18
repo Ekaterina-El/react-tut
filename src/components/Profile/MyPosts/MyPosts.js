@@ -35,7 +35,7 @@ const MyPosts = () => {
         {state.posts.map((post) => {
           return (
             <Post
-              key={post.id}
+              key={post.idT}
               {...post} />
           );
         })}
