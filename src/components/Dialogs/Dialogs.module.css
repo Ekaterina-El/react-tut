@@ -1,0 +1,13 @@
+.wrapper {
+    padding: 1em;
+}
+
+.title {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
