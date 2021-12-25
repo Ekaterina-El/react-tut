@@ -1,29 +1,22 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
   addPostAC,
   changeNewPostTextAC,
 } from "../../../../redux/profileReducer";
-import StoreContext from "../../../../StoreContext";
 import AddPost from "./AddPost";
 
-const AddPostContainer = () => {
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        const handleChange = (text) => {
-          store.dispatch(changeNewPostTextAC(text));
-        };
-      
-        const handleAddPost = () => {
-          store.dispatch(addPostAC());
-        };
+export default connect(
+  state => {
+    return {
+      newPostText: state.profile.newPostText
+    }
+  },
 
-        return (
-          <AddPost newPostText={store.getState().profile.newPostText} addPost={handleAddPost} changeNewPostText={handleChange} />
-        );
-      }}
-    </StoreContext.Consumer>
-  );
-};
-
-export default AddPostContainer;
+  dispatch => {
+    return {
+      addPost: () => dispatch(addPostAC()),
+      changeNewPostTextAC: (text) => dispatch(changeNewPostTextAC(text))
+    }
+  }
+)(AddPost);

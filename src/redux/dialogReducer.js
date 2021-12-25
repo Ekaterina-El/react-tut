@@ -59,6 +59,7 @@ const dialogReducer = (state = initState, action) => {
     }
 
     case ADD_MESSAGE: {
+      debugger
       const newMessage = {
         id: new Date().getTime(),
         text: state.newMessageText,
