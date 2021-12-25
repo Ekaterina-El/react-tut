@@ -34,14 +34,15 @@ const profileReducer = (state = initState, action) => {
         photoUrl:
           "https://images.unsplash.com/photo-1490650034439-fd184c3c86a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
       };
-      debugger;
-      state.newPostText = "";
-      state.posts.push(newPost);
-      return state;
+
+      return {
+        ...state,
+        newPostText: "",
+        posts: [...state.posts, newPost],
+      };
     }
 
     case CHANGE_NEW_POST_TEXT: {
-      debugger
       return {
         ...state,
         newPostText: action.text,
@@ -59,7 +60,10 @@ export const addPostAC = () => ({
   type: ADD_POST,
 });
 
-export const changeNewPostTextAC = (text) => ({
-  type: CHANGE_NEW_POST_TEXT,
-  text,
-});
+export const changeNewPostTextAC = (text) => {
+  debugger
+  return {
+    type: CHANGE_NEW_POST_TEXT,
+    text,
+  };
+};

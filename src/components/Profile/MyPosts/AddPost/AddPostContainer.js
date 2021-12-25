@@ -16,7 +16,7 @@ export default connect(
   dispatch => {
     return {
       addPost: () => dispatch(addPostAC()),
-      changeNewPostTextAC: (text) => dispatch(changeNewPostTextAC(text))
+      changeNewPostText: (text) => dispatch(changeNewPostTextAC(text))
     }
   }
 )(AddPost);
