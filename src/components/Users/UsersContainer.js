@@ -18,7 +18,10 @@ class UsersAPIComponent extends React.Component {
     this.props.setFetchingStatus(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+        {
+          withCredentials: true
+        }
       )
       .then((response) => {
         this.props.setFetchingStatus(false);
@@ -33,7 +36,10 @@ class UsersAPIComponent extends React.Component {
       this.props.setFetchingStatus(true);
       axios
         .get(
-          `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+          `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
+          {
+            withCredentials: true
+          }
         )
         .then((response) => {
           this.props.setFetchingStatus(false);
@@ -43,11 +49,55 @@ class UsersAPIComponent extends React.Component {
     }
   };
 
+  toggleFollow(status, id) {
+    debugger;
+    if (status) {
+      axios
+        .delete(
+          `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+          {
+            withCredentials: true,
+            headers: {
+              "API-KEY": "21f9c0f6-fe2f-4bf6-9268-2442c02b9574",
+            },
+          }
+        )
+        .then((res) => {
+          debugger;
+          if (res.data.resultCode === 0) {
+            this.props.toggleFollow(id);
+          }
+        });
+    } else {
+      axios
+        .post(
+          `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+          {},
+          {
+            withCredentials: true,
+            headers: {
+              "API-KEY": "21f9c0f6-fe2f-4bf6-9268-2442c02b9574",
+            },
+          }
+        )
+        .then((res) => {
+          debugger;
+          if (res.data.resultCode === 0) {
+            this.props.toggleFollow(id);
+          }
+        });
+    }
+  }
+
   render() {
     return this.props.isFetching ? (
       <Loader />
     ) : (
-      <Users {...this.props} handleChangePage={this.handleChangePage} />
+      <Users
+        {...this.props}
+        toggleFollow={this.toggleFollow.bind(this)}
+        handleChangePage={this.handleChangePage}
+      />
     );
   }
 }

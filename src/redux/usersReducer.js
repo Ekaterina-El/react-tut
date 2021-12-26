@@ -19,7 +19,7 @@ const usersReducer = (state = initState, { type, payload }) => {
           }
           return {
             ...user,
-            isFolowed: !user.isFolowed,
+            followed: !user.followed,
           };
         }),
       };

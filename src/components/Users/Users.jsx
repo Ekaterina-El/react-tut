@@ -29,7 +29,7 @@ const Users = ({
         })}
       </div>
       {users.map((user) => (
-        <UsersItem key={user.id} user={user} toggleFollow={toggleFollow} />
+        <UsersItem key={user.id} user={user} toggleFollow={() => toggleFollow(user.followed, user.id)} />
       ))}
     </div>
   );
