@@ -5,6 +5,8 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Header from "./components/Header/Header";
 import Nav from "./components/NavBar/Nav";
 import Profile from "./components/Profile/Profile";
+import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <div className="content">
         <Route path="/profile/" render={() => <Profile />} />
         <Route path="/dialogs/" render={() => <DialogsContainer />} />
+        <Route path="/users/" render={() => <UsersContainer />} />
       </div>
     </div>
   );

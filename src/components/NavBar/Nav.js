@@ -18,6 +18,10 @@ const Nav = () => {
       <a href="#" className={s.item}>
         Music
       </a>
+
+      <NavLink className={s.item} activeClassName={s.active} to="/users/">
+        Find users
+      </NavLink>
       <a href="#" className={s.item}>
         Settings
       </a>
