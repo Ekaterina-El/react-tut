@@ -1,78 +1,84 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import s from "./Users.module.css";
 
-const Users = ({ toggleFolow, users, setUsers }) => {
-  if (users.length === 0) {
-    setUsers([
-      {
-        id: 1,
-        photoUrl:
-          "https://images.unsplash.com/photo-1490650034439-fd184c3c86a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
-        fullname: "Dmitry K.",
-        isFolowed: true,
-        location: {
-          city: "Minsk",
-          country: "Belorus",
-        },
-        status: "I am ...",
-      },
+import userPhoto from "../../assets/empty_photo.jpg";
 
-      {
-        id: 2,
-        photoUrl:
-          "https://images.unsplash.com/photo-1490650034439-fd184c3c86a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
-        fullname: "Valera F.",
-        isFolowed: false,
-        location: {
-          city: "Minsk",
-          country: "Belorus",
-        },
-        status: "I am ...",
-      },
-
-      {
-        id: 3,
-        photoUrl:
-          "https://images.unsplash.com/photo-1490650034439-fd184c3c86a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
-        fillName: "Maria T.",
-        isFolowed: true,
-        location: {
-          city: "Moskow",
-          country: "Russia",
-        },
-        status: "I am ...",
-      },
-    ]);
+class Users extends React.Component {
+  componentDidMount() {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalCount(response.data.totalCount);
+      });
   }
-  return (
-    <div>
-      {users.map((user) => (
-        <div key={user.id}>
-          <span>
-            <div>
-              <img className={s.userPhoto} src={user.photoUrl} alt="ava" />
-            </div>
-            <div>
-              <button onClick={() => toggleFolow(user.id)}>
-                {user.isFolowed ? "Unfollow" : "Follow"}
-              </button>
-            </div>
-          </span>
 
-          <span>
-            <span>
-              <div>{user.fullName}</div>
-              <div>{user.status}</div>
-            </span>
-            <span>
-              <div>{user.location.country},</div>
-              <div>{user.location.city}</div>
-            </span>
-          </span>
+  handleChangePage = page => {
+    this.props.setCurrentPage(page)
+
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalCount(response.data.totalCount);
+      });
+  }
+
+  render() {
+    const pages = [];
+    for (let i = 1; i <= 10; i++) {
+      pages.push(i)
+    }
+
+    return (
+      <div>
+        <div>
+          {
+            pages.map(page => {
+              return <span 
+                onClick={() => this.handleChangePage(page)}
+              className={page === this.props.currentPage && s.selectedPage}>{page}</span>
+            })
+          }
         </div>
-      ))}
-    </div>
-  );
-};
+
+        {this.props.users.map((user) => (
+          <div key={user.id}>
+            <span>
+              <div>
+                <img
+                  className={s.userPhoto}
+                  src={user.photos.small || userPhoto}
+                  alt="ava"
+                />
+              </div>
+              <div>
+                <button onClick={() => this.props.toggleFolow(user.id)}>
+                  {user.isFolowed ? "Unfollow" : "Follow"}
+                </button>
+              </div>
+            </span>
+
+            <span>
+              <span>
+                <div>{user.name}</div>
+                <div>{user.status}</div>
+              </span>
+              <span>
+                <div>{"Country"},</div>
+                <div>{"City"}</div>
+              </span>
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+}
 
 export default Users;
