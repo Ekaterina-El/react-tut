@@ -1,7 +1,9 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
+import emptyPhoto from '../../../assets/empty_photo.jpg'
 
-const ProfileInfo = () => {
+const ProfileInfo = ({profile}) => {
+  debugger
   return (
     <div className={s.header}>
       <img
@@ -14,9 +16,12 @@ const ProfileInfo = () => {
         <img
           className={s.profile_photo}
           alt=""
-          src="https://images.unsplash.com/photo-1490650034439-fd184c3c86a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+          src={profile.photos?.large || emptyPhoto}
         />
-        Discription
+        <div>
+          <h2>{profile.fullName}</h2>
+          <p>About me: {profile.aboutMe || "empty"}</p>
+        </div>
       </div>
     </div>
   );

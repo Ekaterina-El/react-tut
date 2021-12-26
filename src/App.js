@@ -4,7 +4,7 @@ import "./App.css";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Header from "./components/Header/Header";
 import Nav from "./components/NavBar/Nav";
-import Profile from "./components/Profile/Profile";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Header />
       <Nav />
       <div className="content">
-        <Route path="/profile/" render={() => <Profile />} />
+        <Route path="/profile/" render={() => <ProfileContainer />} />
         <Route path="/dialogs/" render={() => <DialogsContainer />} />
         <Route path="/users/" render={() => <UsersContainer />} />
       </div>
