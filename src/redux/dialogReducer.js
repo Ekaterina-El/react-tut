@@ -81,11 +81,11 @@ const dialogReducer = (state = initState, action) => {
 
 export default dialogReducer;
 
-export const addMessageAC = () => ({
+export const sendMessage = () => ({
   type: ADD_MESSAGE,
 });
 
-export const changeNewMessageTextAC = (text) => ({
+export const changeMessageText = (text) => ({
   type: CHANGE_NEW_MESSAGE_TEXT,
   text,
 });
