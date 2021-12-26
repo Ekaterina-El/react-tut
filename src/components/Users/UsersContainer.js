@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import {
-  setCurrentPageAC,
-  setFetchingStatusAC,
-  setTotalCountAC,
-  setUsersAC,
-  toggleFollowAC,
+  setCurrentPage,
+  setFetchingStatus,
+  setTotalCount,
+  setUsers,
+  toggleFollow,
 } from "../../redux/usersReducer";
 
 import React from "react";
@@ -62,23 +62,11 @@ export default connect(
     isFetching: state.users.isFetching,
   }),
 
-  (dispatch) => ({
-    toggleFollow: (userId) => {
-      dispatch(toggleFollowAC(userId));
-    },
-
-    setUsers: (users) => {
-      dispatch(setUsersAC(users));
-    },
-
-    setTotalCount: (pages) => {
-      dispatch(setTotalCountAC(pages));
-    },
-
-    setCurrentPage: (page) => {
-      dispatch(setCurrentPageAC(page));
-    },
-
-    setFetchingStatus: (status) => dispatch(setFetchingStatusAC(status)),
-  })
+  {
+    toggleFollow,
+    setUsers,
+    setTotalCount,
+    setCurrentPage,
+    setFetchingStatus,
+  }
 )(UsersAPIComponent);

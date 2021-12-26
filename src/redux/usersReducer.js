@@ -59,35 +59,35 @@ const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_FETCHING_STATUS = "SET_FETCHING_STATUS";
 
-export const toggleFollowAC = (id) => ({
+export const toggleFollow = (id) => ({
   type: TOGGLE_FOLLOW,
   payload: {
     id,
   },
 });
 
-export const setUsersAC = (users) => ({
+export const setUsers = (users) => ({
   type: SET_USERS,
   payload: {
     users,
   },
 });
 
-export const setTotalCountAC = (pages) => ({
+export const setTotalCount = (pages) => ({
   type: SET_TOTAL_COUNT,
   payload: {
     pages,
   },
 });
 
-export const setCurrentPageAC = (page) => ({
+export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,
   payload: {
     page,
   },
 });
 
-export const setFetchingStatusAC = (status) => ({
+export const setFetchingStatus = (status) => ({
   type: SET_FETCHING_STATUS,
   payload: {
     status,

@@ -1,7 +1,6 @@
 import React from "react";
 import UsersItem from "./UserItem";
 import PaginationItem from "./PaginationItem";
-import Loader from "../Loader/Loader";
 // import s from "./Users.module.css";
 
 const Users = ({
@@ -9,7 +8,6 @@ const Users = ({
   currentPage,
   toggleFollow,
   users,
-  isFetching,
 }) => {
   const pages = [];
   for (let i = 1; i <= 10; i++) {
@@ -30,14 +28,9 @@ const Users = ({
           );
         })}
       </div>
-
-      {isFetching ? (
-        <Loader />
-      ) : (
-        users.map((user) => (
-          <UsersItem key={user.id} user={user} toggleFollow={toggleFollow} />
-        ))
-      )}
+      {users.map((user) => (
+        <UsersItem key={user.id} user={user} toggleFollow={toggleFollow} />
+      ))}
     </div>
   );
 };
