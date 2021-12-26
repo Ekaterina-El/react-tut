@@ -4,6 +4,8 @@ const initState = {
   currentPage: 1,
   pages: 0,
   totalCount: 0,
+
+  isFetching: true,
 };
 
 const usersReducer = (state = initState, { type, payload }) => {
@@ -41,6 +43,9 @@ const usersReducer = (state = initState, { type, payload }) => {
         currentPage: payload.page,
       };
 
+    case SET_FETCHING_STATUS:
+      return { ...state, isFetching: payload.status };
+
     default:
       return state;
   }
@@ -52,6 +57,7 @@ const TOGGLE_FOLLOW = "TOGGLE_FOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_FETCHING_STATUS = "SET_FETCHING_STATUS";
 
 export const toggleFollowAC = (id) => ({
   type: TOGGLE_FOLLOW,
@@ -78,5 +84,12 @@ export const setCurrentPageAC = (page) => ({
   type: SET_CURRENT_PAGE,
   payload: {
     page,
+  },
+});
+
+export const setFetchingStatusAC = (status) => ({
+  type: SET_FETCHING_STATUS,
+  payload: {
+    status,
   },
 });
