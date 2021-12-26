@@ -28,7 +28,7 @@ class UsersAPIComponent extends React.Component {
   }
 
   handleChangePage = (page) => {
-    if (page != this.props.currentPage) {
+    if (page !== this.props.currentPage) {
       this.props.setCurrentPage(page);
       this.props.setFetchingStatus(true);
       axios

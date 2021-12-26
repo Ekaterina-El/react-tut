@@ -1,22 +1,16 @@
-import React from "react";
 import { connect } from "react-redux";
-import {
-  addPostAC,
-  changeNewPostTextAC,
-} from "../../../../redux/profileReducer";
+import { addPost, changeNewPostText } from "../../../../redux/profileReducer";
 import AddPost from "./AddPost";
 
 export default connect(
-  state => {
+  (state) => {
     return {
-      newPostText: state.profile.newPostText
-    }
+      newPostText: state.profile.newPostText,
+    };
   },
 
-  dispatch => {
-    return {
-      addPost: () => dispatch(addPostAC()),
-      changeNewPostText: (text) => dispatch(changeNewPostTextAC(text))
-    }
+  {
+    addPost,
+    changeNewPostText,
   }
 )(AddPost);

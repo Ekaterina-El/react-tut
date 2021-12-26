@@ -56,11 +56,11 @@ const profileReducer = (state = initState, action) => {
 
 export default profileReducer;
 
-export const addPostAC = () => ({
+export const addPost = () => ({
   type: ADD_POST,
 });
 
-export const changeNewPostTextAC = (text) => {
+export const changeNewPostText = (text) => {
   debugger
   return {
     type: CHANGE_NEW_POST_TEXT,

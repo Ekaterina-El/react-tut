@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./AddPost.module.css";
+// import s from "./AddPost.module.css";
 
 const AddPost = ({ newPostText, addPost, changeNewPostText }) => {
   debugger;
