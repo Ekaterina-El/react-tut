@@ -53,7 +53,7 @@ const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
-export const toggleFolowAC = (id) => ({
+export const toggleFollowAC = (id) => ({
   type: TOGGLE_FOLLOW,
   payload: {
     id,

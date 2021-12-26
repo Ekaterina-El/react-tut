@@ -1,6 +1,45 @@
 import { connect } from "react-redux";
-import { setCurrentPageAC, setPagesAC, setTotalCountAC, setUsersAC, toggleFolowAC } from "../../redux/usersReducer";
-import Users from "./Users";
+import {
+  setCurrentPageAC,
+  setTotalCountAC,
+  setUsersAC,
+  toggleFollowAC,
+} from "../../redux/usersReducer";
+
+import React from 'react'
+import axios from "axios";
+import Users from './Users'
+
+class UsersAPIComponent extends React.Component {
+  componentDidMount() {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalCount(response.data.totalCount);
+      });
+  }
+
+  handleChangePage = (page) => {
+    this.props.setCurrentPage(page);
+
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalCount(response.data.totalCount);
+      });
+  };
+
+  render() {
+    debugger
+    return <Users {...this.props} handleChangePage={this.handleChangePage} />;
+  }
+}
 
 export default connect(
   (state) => ({
@@ -8,12 +47,12 @@ export default connect(
     currentPage: state.users.currentPage,
     totalCount: state.users.totalCount,
     pageSize: state.users.pageSize,
-    pages: state.users.pages
+    pages: state.users.pages,
   }),
 
   (dispatch) => ({
-    toggleFolow: (userId) => {
-      dispatch(toggleFolowAC(userId));
+    toggleFollow: (userId) => {
+      dispatch(toggleFollowAC(userId));
     },
 
     setUsers: (users) => {
@@ -21,11 +60,11 @@ export default connect(
     },
 
     setTotalCount: (pages) => {
-      dispatch(setTotalCountAC(pages))
+      dispatch(setTotalCountAC(pages));
     },
 
     setCurrentPage: (page) => {
-      dispatch(setCurrentPageAC(page))
-    }
+      dispatch(setCurrentPageAC(page));
+    },
   })
-)(Users);
+)(UsersAPIComponent);
