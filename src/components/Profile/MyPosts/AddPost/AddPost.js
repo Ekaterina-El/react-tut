@@ -2,7 +2,6 @@ import React from "react";
 // import s from "./AddPost.module.css";
 
 const AddPost = ({ newPostText, addPost, changeNewPostText }) => {
-  debugger;
 
   const handleChange = (e) => {
     changeNewPostText(e.target.value)

@@ -54,7 +54,6 @@ const profileReducer = (state = initState, {type, payload}) => {
     }
 
     case CHANGE_PROFILE: {
-      debugger
       return {
         ...state,
         currentProfile: payload.profile

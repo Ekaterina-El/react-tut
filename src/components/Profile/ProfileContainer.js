@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    const id = this.props.match.params.id
+    const id = this.props.match.params.id || this.props.authedId
     debugger
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
@@ -24,6 +24,7 @@ class ProfileContainer extends Component {
 export default connect(
   (state) => ({
     currentProfile: state.profile.currentProfile,
+    authedId: state.auth.id
   }),
 
   {

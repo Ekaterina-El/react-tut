@@ -3,7 +3,6 @@ import s from "./ProfileInfo.module.css";
 import emptyPhoto from '../../../assets/empty_photo.jpg'
 
 const ProfileInfo = ({profile}) => {
-  debugger
   return (
     <div className={s.header}>
       <img
