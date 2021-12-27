@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import userPhoto from "../../assets/empty_photo.jpg";
 import s from "./Users.module.css";
 
-const UsersItem = ({ toggleFollow, user }) => {
+const UsersItem = ({ toggleFollow, user, inFollowing }) => {
   return (
     <div>
       <span>
@@ -17,7 +17,7 @@ const UsersItem = ({ toggleFollow, user }) => {
           </NavLink>
         </div>
         <div>
-          <button onClick={toggleFollow}>
+          <button onClick={toggleFollow} disabled={inFollowing}>
             {user.followed ? "Unfollow" : "Follow"}
           </button>
         </div>

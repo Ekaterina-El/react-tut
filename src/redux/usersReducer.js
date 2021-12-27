@@ -6,6 +6,7 @@ const initState = {
   totalCount: 0,
 
   isFetching: true,
+  followingInProgress: [],
 };
 
 const usersReducer = (state = initState, { type, payload }) => {
@@ -46,6 +47,21 @@ const usersReducer = (state = initState, { type, payload }) => {
     case SET_FETCHING_STATUS:
       return { ...state, isFetching: payload.status };
 
+    case TOGGLE_FOLLOWING_IN_PROGRESS:
+      if (state.followingInProgress.includes(payload.id)) {
+        return {
+          ...state,
+          followingInProgress: state.followingInProgress.filter(
+            (id) => id !== payload.id
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          followingInProgress: [...state.followingInProgress, payload.id],
+        };
+      }
+
     default:
       return state;
   }
@@ -58,6 +74,8 @@ const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_FETCHING_STATUS = "SET_FETCHING_STATUS";
+
+const TOGGLE_FOLLOWING_IN_PROGRESS = "TOGGLE_FOLLOWING_IN_PROGRESS";
 
 export const toggleFollow = (id) => ({
   type: TOGGLE_FOLLOW,
@@ -91,5 +109,12 @@ export const setFetchingStatus = (status) => ({
   type: SET_FETCHING_STATUS,
   payload: {
     status,
+  },
+});
+
+export const toggleFollowingInProgress = (id) => ({
+  type: TOGGLE_FOLLOWING_IN_PROGRESS,
+  payload: {
+    id,
   },
 });

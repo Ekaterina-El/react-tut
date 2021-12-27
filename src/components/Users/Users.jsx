@@ -8,7 +8,9 @@ const Users = ({
   currentPage,
   toggleFollow,
   users,
+  followingInProgress,
 }) => {
+  debugger
   const pages = [];
   for (let i = 1; i <= 10; i++) {
     pages.push(i);
@@ -29,7 +31,12 @@ const Users = ({
         })}
       </div>
       {users.map((user) => (
-        <UsersItem key={user.id} user={user} toggleFollow={() => toggleFollow(user.followed, user.id)} />
+        <UsersItem
+          inFollowing={followingInProgress.includes(user.id)}
+          key={user.id}
+          user={user}
+          toggleFollow={() => toggleFollow(user.followed, user.id)}
+        />
       ))}
     </div>
   );

@@ -5,6 +5,7 @@ import {
   setTotalCount,
   setUsers,
   toggleFollow,
+  toggleFollowingInProgress,
 } from "../../redux/usersReducer";
 
 import React from "react";
@@ -17,11 +18,13 @@ class UsersAPIComponent extends React.Component {
   componentDidMount() {
     this.props.setFetchingStatus(true);
 
-    usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-      this.props.setFetchingStatus(false);
-      this.props.setUsers(data.items);
-      this.props.setTotalCount(data.totalCount);
-    });
+    usersAPI
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
+        this.props.setFetchingStatus(false);
+        this.props.setUsers(data.items);
+        this.props.setTotalCount(data.totalCount);
+      });
   }
 
   handleChangePage = (page) => {
@@ -38,19 +41,24 @@ class UsersAPIComponent extends React.Component {
   };
 
   toggleFollow(status, id) {
-    debugger;
-    if (status) {
-      profileAPI.unfollowUser(id).then((data) => {
-        if (data.resultCode === 0) {
-          this.props.toggleFollow(id);
-        }
-      });
-    } else {
-      profileAPI.followUser(id).then((data) => {
-        if (data.resultCode === 0) {
-          this.props.toggleFollow(id);
-        }
-      });
+    if (!this.props.followingInProgress.includes(id)) {
+      if (status) {
+        this.props.toggleFollowingInProgress(id);
+        profileAPI.unfollowUser(id).then((data) => {
+          if (data.resultCode === 0) {
+            this.props.toggleFollow(id);
+          }
+          this.props.toggleFollowingInProgress(id);
+        });
+      } else {
+        this.props.toggleFollowingInProgress(id);
+        profileAPI.followUser(id).then((data) => {
+          if (data.resultCode === 0) {
+            this.props.toggleFollow(id);
+          }
+          this.props.toggleFollowingInProgress(id);
+        });
+      }
     }
   }
 
@@ -75,6 +83,7 @@ export default connect(
     pageSize: state.users.pageSize,
     pages: state.users.pages,
     isFetching: state.users.isFetching,
+    followingInProgress: state.users.followingInProgress,
   }),
 
   {
@@ -83,5 +92,6 @@ export default connect(
     setTotalCount,
     setCurrentPage,
     setFetchingStatus,
+    toggleFollowingInProgress,
   }
 )(UsersAPIComponent);
