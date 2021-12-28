@@ -1,63 +1,33 @@
 import { connect } from "react-redux";
 import {
-  setCurrentPage,
-  setFetchingStatus,
-  setTotalCount,
-  setUsers,
-  toggleFollow,
-  toggleFollowingInProgress,
+  getUsers,
+  unfollowUser,
+  followUser
 } from "../../redux/usersReducer";
 
 import React from "react";
 import Users from "./Users";
 
 import Loader from "../Loader/Loader";
-import { profileAPI, usersAPI } from "../../api/api";
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
-    this.props.setFetchingStatus(true);
-
-    usersAPI
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.setFetchingStatus(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalCount(data.totalCount);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   handleChangePage = (page) => {
     if (page !== this.props.currentPage) {
-      this.props.setCurrentPage(page);
-      this.props.setFetchingStatus(true);
-
-      usersAPI.getUsers(page, this.props.pageSize).then((data) => {
-        this.props.setFetchingStatus(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalCount(data.totalCount);
-      });
+      this.props.getUsers(page, this.props.pageSize);
     }
   };
 
   toggleFollow(status, id) {
+    debugger
     if (!this.props.followingInProgress.includes(id)) {
       if (status) {
-        this.props.toggleFollowingInProgress(id);
-        profileAPI.unfollowUser(id).then((data) => {
-          if (data.resultCode === 0) {
-            this.props.toggleFollow(id);
-          }
-          this.props.toggleFollowingInProgress(id);
-        });
+        this.props.unfollowUser(id)
       } else {
-        this.props.toggleFollowingInProgress(id);
-        profileAPI.followUser(id).then((data) => {
-          if (data.resultCode === 0) {
-            this.props.toggleFollow(id);
-          }
-          this.props.toggleFollowingInProgress(id);
-        });
+        this.props.followUser(id)
       }
     }
   }
@@ -87,11 +57,8 @@ export default connect(
   }),
 
   {
-    toggleFollow,
-    setUsers,
-    setTotalCount,
-    setCurrentPage,
-    setFetchingStatus,
-    toggleFollowingInProgress,
+    getUsers,
+    unfollowUser,
+    followUser
   }
 )(UsersAPIComponent);

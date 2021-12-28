@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import { setCurrentProfile } from "../../redux/profileReducer";
+import { getProfile } from "../../redux/profileReducer";
 import { withRouter } from "react-router-dom";
-import { profileAPI } from "../../api/api";
 
 class ProfileContainer extends Component {
   componentDidMount() {
     const id = this.props.match.params.id || this.props.authedId;
-    profileAPI.getUserProfile(id).then((data) => {
-      this.props.setCurrentProfile(data);
-    });
+    this.props.getProfile(id);
   }
 
   render() {
@@ -25,6 +22,6 @@ export default connect(
   }),
 
   {
-    setCurrentProfile,
+    getProfile,
   }
 )(withRouter(ProfileContainer));

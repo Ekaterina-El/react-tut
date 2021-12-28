@@ -1,6 +1,8 @@
+import { profileAPI } from "../api/api";
+
 export const ADD_POST = "ADD_POST";
 export const CHANGE_NEW_POST_TEXT = "CHANGE_NEW_POST_TEXT";
-const CHANGE_PROFILE = "CHANGE_PROFILE"
+const CHANGE_PROFILE = "CHANGE_PROFILE";
 
 const initState = {
   newPostText: "",
@@ -25,10 +27,10 @@ const initState = {
     },
   ],
 
-  currentProfile: {}
+  currentProfile: {},
 };
 
-const profileReducer = (state = initState, {type, payload}) => {
+const profileReducer = (state = initState, { type, payload }) => {
   switch (type) {
     case ADD_POST: {
       const newPost = {
@@ -46,7 +48,6 @@ const profileReducer = (state = initState, {type, payload}) => {
     }
 
     case CHANGE_NEW_POST_TEXT: {
-
       return {
         ...state,
         newPostText: payload.text,
@@ -56,8 +57,8 @@ const profileReducer = (state = initState, {type, payload}) => {
     case CHANGE_PROFILE: {
       return {
         ...state,
-        currentProfile: payload.profile
-      }
+        currentProfile: payload.profile,
+      };
     }
 
     default:
@@ -75,7 +76,7 @@ export const changeNewPostText = (text) => {
   return {
     type: CHANGE_NEW_POST_TEXT,
     payload: {
-      text
+      text,
     },
   };
 };
@@ -83,7 +84,12 @@ export const changeNewPostText = (text) => {
 export const setCurrentProfile = (profile) => ({
   type: CHANGE_PROFILE,
   payload: {
-    profile
-  }
-})
+    profile,
+  },
+});
 
+export const getProfile = (id) => (dispatch) => {
+  profileAPI.getUserProfile(id).then((data) => {
+    dispatch(setCurrentProfile(data));
+  });
+};

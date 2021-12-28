@@ -1,3 +1,5 @@
+import { profileAPI, usersAPI } from "../api/api";
+
 const initState = {
   users: [],
   pageSize: 5,
@@ -118,3 +120,36 @@ export const toggleFollowingInProgress = (id) => ({
     id,
   },
 });
+
+export const getUsers = (currentPage, pageSize) => (dispatch) => {
+  dispatch(setCurrentPage(currentPage))
+  dispatch(setFetchingStatus(true));
+
+  usersAPI.getUsers(currentPage, pageSize).then((data) => {
+    dispatch(setFetchingStatus(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalCount(data.totalCount));
+  });
+};
+
+export const unfollowUser = (id) => (dispatch) => {
+  dispatch(toggleFollowingInProgress(id));
+
+  profileAPI.unfollowUser(id).then((data) => {
+    if (data.resultCode === 0) {
+      dispatch(toggleFollow(id));
+    }
+    dispatch(toggleFollowingInProgress(id));
+  });
+};
+
+export const followUser = (id) => (dispatch) => {
+  dispatch(toggleFollowingInProgress(id));
+
+  profileAPI.followUser(id).then((data) => {
+    if (data.resultCode === 0) {
+      dispatch(toggleFollow(id));
+    }
+    dispatch(toggleFollowingInProgress(id));
+  });
+};

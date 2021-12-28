@@ -10,7 +10,6 @@ const Users = ({
   users,
   followingInProgress,
 }) => {
-  debugger
   const pages = [];
   for (let i = 1; i <= 10; i++) {
     pages.push(i);
