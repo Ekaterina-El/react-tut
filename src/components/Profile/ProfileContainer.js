@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
 import { getProfile } from "../../redux/profileReducer";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 class ProfileContainer extends Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class ProfileContainer extends Component {
   }
 
   render() {
-    return <Profile {...this.props} />;
+    return this.props.authedId !== null ? <Profile {...this.props} /> : <Redirect to={"/login"} />
   }
 }
 
